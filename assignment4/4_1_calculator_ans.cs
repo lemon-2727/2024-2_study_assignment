@@ -52,16 +52,29 @@ namespace calculator
         // ---------- TODO ----------
         public double Calculate(double num1, string op, double num2)
         {
-            return op switch
-            {
-                "+" => num1 + num2,
-                "-" => num1 - num2,
-                "*" => num1 * num2,
-                "/" => num2 != 0 ? num1 / num2 : throw new DivideByZeroException("Cannot divide by zero"),
-                "%" => num1 % num2,
-                "**" => Math.Pow(num1, num2),
-                _ => throw new InvalidOperationException($"Operator '{op}' is not supported"),
-            };
+            if (op == "+"){
+                return num1 + num2;
+            }
+            else if (op == "-"){
+                return num1 - num2;
+            }
+            else if (op == "*"){
+                return num1 * num2;
+            }
+            else if (op == "/"){
+                if (num2 == 0)
+                    throw new DivideByZeroException("Cannot divide by zero");
+                return num1 / num2;
+            }
+            else if (op == "%"){
+                return num1 % num2;
+            }
+            else if (op == "**"){
+                return Math.Pow(num1, num2);
+            }
+            else{
+                throw new InvalidOperationException($"Operator '{op}' is not supported");
+            }
         }
         
         // --------------------
