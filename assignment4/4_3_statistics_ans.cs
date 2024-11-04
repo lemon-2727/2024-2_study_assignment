@@ -20,7 +20,6 @@ namespace statistics
 
             int stdCount = data.GetLength(0) - 1;
             // ---------- TODO ----------
-            int stdCount = data.GetLength(0) - 1;
             
             double[] science = new double[stdCount];
             double[] math = new double[stdCount];
