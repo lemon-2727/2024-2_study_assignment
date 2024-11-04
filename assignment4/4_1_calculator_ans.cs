@@ -50,6 +50,19 @@ namespace calculator
     public class Calculator
     {
         // ---------- TODO ----------
+        public double Calculate(double num1, string op, double num2)
+        {
+            return op switch
+            {
+                "+" => num1 + num2,
+                "-" => num1 - num2,
+                "*" => num1 * num2,
+                "/" => num2 != 0 ? num1 / num2 : throw new DivideByZeroException("Cannot divide by zero"),
+                "%" => num1 % num2,
+                "**" => Math.Pow(num1, num2),
+                _ => throw new InvalidOperationException($"Operator '{op}' is not supported"),
+            };
+        }
         
         // --------------------
     }
