@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     {
         // 좌클릭시 raycast하여 클릭 위치로 ShootBallTo 한다.
         // ---------- TODO ---------- 
-        if (Input.GetMouseButtonDown(0)) // Left mouse click
+        if (Input.GetMouseButtonDown(0)) 
         {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
@@ -70,12 +70,11 @@ public class GameManager : MonoBehaviour
         // ---------- TODO ---------- 
         int index = 0;
 
-        for (int row = 0; row < 5; row++)
-        {
-            for (int col = 0; col <= row; col++)
-            {
-                Vector3 position = 
-                StartPosition + new Vector3((col - row / 2f) * (BallRadius * 2 + RowSpacing), 0, row * (BallRadius * 2 + RowSpacing));
+        for (int row = 0; row < 5; row++) {
+            for (int col = 0; col <= row; col++) {
+
+                Vector3 position = StartPosition + 
+                new Vector3((col - row / 2f) * (BallRadius * 2 + RowSpacing), 0, -row * (BallRadius * 2 + RowSpacing));
                 GameObject ball = Instantiate(BallPrefab, position, StartRotation);
                 ball.name = index.ToString();
                 ball.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/ball_{index % 15 + 1}");
