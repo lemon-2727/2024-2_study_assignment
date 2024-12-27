@@ -19,6 +19,11 @@ public class Tile : MonoBehaviour
         // MyPos를 targetPos로 지정함
         // 위치를 targetPos 이동시키고, 배치에 따라 색깔을 지정
         // --- TODO ---
+        MyPos = targetPos;
+        transform.position = new Vector3(targetPos.Item1, targetPos.Item2, 0);
+        bool blackTile = (targetPos.Item1 + targetPos.Item2) % 2 == 0;
+        tileColor = blackTile ? new Color(0.8f, 0.8f, 0.8f) : new Color(0.4f, 0.4f, 0.4f);
+        MySpriteRenderer.color = tileColor;
         
         // ------
     }
