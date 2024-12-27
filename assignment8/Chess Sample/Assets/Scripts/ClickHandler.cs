@@ -80,10 +80,7 @@ public class ClickHandler : MonoBehaviour
             }
             gameManager.ClearEffects();
             
-            // ------
-            isDragging = false;
-            selectedPiece = null;
-            
+        
             // ------
             isDragging = false;
             selectedPiece = null;
