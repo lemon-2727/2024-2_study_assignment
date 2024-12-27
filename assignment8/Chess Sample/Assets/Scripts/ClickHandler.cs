@@ -29,11 +29,15 @@ public class ClickHandler : MonoBehaviour
 
     void HandleMouseDown()
     {
+        
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var boardPos = GetBoardPosition(mousePosition);
+        Debug.Log("mouse position:" + mousePosition);
+        Debug.Log("board position:" + boardPos);
 
         if (!Utils.IsInBoard(boardPos)) return;
         Piece clickedPiece = gameManager.Pieces[boardPos.Item1, boardPos.Item2];
+        Debug.Log("selected piece:" + clickedPiece);
         if (clickedPiece != null && clickedPiece.PlayerDirection == gameManager.CurrentTurn)
         {
             selectedPiece = clickedPiece;
@@ -44,6 +48,7 @@ public class ClickHandler : MonoBehaviour
             
             gameManager.ShowPossibleMoves(selectedPiece);
         }
+        Debug.Log("selected piece:" + selectedPiece);
     }
 
     void HandleDrag()
@@ -51,7 +56,7 @@ public class ClickHandler : MonoBehaviour
         if (selectedPiece != null)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0;
+            mousePosition.z = -2;
             selectedPiece.transform.position = mousePosition + dragOffset;
         }
     }
@@ -62,25 +67,26 @@ public class ClickHandler : MonoBehaviour
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var boardPos = GetBoardPosition(mousePosition); // 현재 좌표
-
+            //Debug.Log("check1");
             // 좌표를 검증함
             // selectedPiece가 움직일 수 있는지를 확인하고, 이동시킴
             // 움직일 수 없다면 selectedPiece를 originalPosition으로 이동시킴
             // effect를 초기화
             // --- TODO ---
-
+            //Debug.Log(boardPos.Item1 + " " + boardPos.Item2);
             if (Utils.IsInBoard(boardPos) && gameManager.IsValidMove(selectedPiece,boardPos))
             {
                 gameManager.Move(selectedPiece, boardPos);
+                //Debug.Log("check2");
                 
             }
             else{
                 selectedPiece.transform.position = originalPosition;
+                //Debug.Log("check3");
                 
             }
             gameManager.ClearEffects();
             
-        
             // ------
             isDragging = false;
             selectedPiece = null;
