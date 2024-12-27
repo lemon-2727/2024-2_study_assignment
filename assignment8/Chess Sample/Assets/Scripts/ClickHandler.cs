@@ -24,7 +24,7 @@ public class ClickHandler : MonoBehaviour
         int boardX = Mathf.FloorToInt(x / Utils.TileSize);
         int boardY = Mathf.FloorToInt(y / Utils.TileSize);
         
-        return (boardX, boardY);
+        return (boardX-3, boardY-3);
     }
 
     void HandleMouseDown()
@@ -68,6 +68,21 @@ public class ClickHandler : MonoBehaviour
             // 움직일 수 없다면 selectedPiece를 originalPosition으로 이동시킴
             // effect를 초기화
             // --- TODO ---
+
+            if (Utils.IsInBoard(boardPos) && gameManager.IsValidMove(selectedPiece,boardPos))
+            {
+                gameManager.Move(selectedPiece, boardPos);
+                
+            }
+            else{
+                selectedPiece.transform.position = originalPosition;
+                
+            }
+            gameManager.ClearEffects();
+            
+            // ------
+            isDragging = false;
+            selectedPiece = null;
             
             // ------
             isDragging = false;
